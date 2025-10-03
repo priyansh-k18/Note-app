@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<NotesPage />} />
         <Route path="/notes/:id" element={<NoteDetail />} />
-        <Route path="/notes/:id/edit" element={<NoteEdit/>}/>
+        <Route path="/notes/:id/edit" element={<NoteEdit/>}/> //workflow
       </Routes>
     </Router>
   );
