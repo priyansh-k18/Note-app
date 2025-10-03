@@ -28,6 +28,6 @@ services:
     ports:
       # Expose the frontend service to the host (public IP) on port 80 
       # which maps to the container's 5173 port (where Vite serves the app).
-      - "80:5173"
+      - "5173:5173"
     depends_on:
       - backend
