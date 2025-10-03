@@ -1,16 +1,27 @@
 FROM node:20-alpine
 
-WORKDIR /app
-
-COPY package*.json ./
-
-RUN npm install
-
-COPY . .
-
+# --- ARG/ENV DEFINITIONS ---
+# Define the build argument. Docker requires this to capture the value
+# passed from docker-compose.yml.
 ARG VITE_API_URL
+
+# Set the environment variable. Vite's build process reads this environment
+# variable and bakes the value into the final JavaScript bundle.
 ENV VITE_API_URL=$VITE_API_URL
 
+# ---------------------------
+
+WORKDIR /app
+
+# Copy package files and install dependencies (can be cached)
+COPY package*.json ./
+RUN npm install
+
+# Copy application source code
+COPY . .
+
+# Run the build. This step now guarantees it uses the VITE_API_URL
+# defined just above, forcing a new build layer if the ARG value changes.
 RUN npm run build
 
 EXPOSE 5173
