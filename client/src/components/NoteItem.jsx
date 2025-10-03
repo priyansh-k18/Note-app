@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function NoteItem({ note }) {
   // short preview of description
   const preview =
-    note.description.length > 60
+    note.description?.length > 60
       ? note.description.substring(0, 60) + "..."
       : note.description;
 
