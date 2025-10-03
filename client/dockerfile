@@ -3,11 +3,11 @@ FROM node:20-alpine
 # --- ARG/ENV DEFINITIONS ---
 # Define the build argument. Docker requires this to capture the value
 # passed from docker-compose.yml.
-ARG VITE_API_URL
+ARG VITE_BASE_URL
 
 # Set the environment variable. Vite's build process reads this environment
 # variable and bakes the value into the final JavaScript bundle.
-ENV VITE_API_URL=$VITE_API_URL
+ENV VITE_BASE_URL=$VITE_BASE_URL
 
 # ---------------------------
 
