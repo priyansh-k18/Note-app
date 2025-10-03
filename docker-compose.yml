@@ -11,7 +11,10 @@ services:
     ports:
       - "3000:3000"
   frontend:
-    build: ./client
+    build: 
+      context: ./client
+      args:
+        - VITE_API_URL=http://13.62.46.194:3000/api
     container_name: note-frontend
     restart: always
     ports:
