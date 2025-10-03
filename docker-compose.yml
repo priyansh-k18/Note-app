@@ -1,23 +1,33 @@
 version: '3.8'
 
 services:
- 
   backend:
-    build: ./server
+    build:
+      # Context is the directory containing the backend Dockerfile
+      context: ./server
     container_name: note-backend
     restart: always
     env_file:
+      # Assumes your backend environment file is here
       - ./server/.env
     ports:
+      # Expose backend service to the host (public IP) on port 3000
       - "3000:3000"
+
   frontend:
-    build: 
+    build:
+      # Context is the directory containing the frontend Dockerfile
       context: ./client
       args:
-        - VITE_API_URL=http://13.62.46.194:3000/api
+        # CRITICAL FIX: Changed argument name to VITE_BASE_URL to match client/src/api.js.
+        # This argument passes the public IP and port 3000 to the Vite build process.
+        # DO NOT include the final '/api' here. Your frontend code should handle that.
+        VITE_BASE_URL: "http://13.62.46.194:3000" 
     container_name: note-frontend
     restart: always
     ports:
-      - "5173:5173"
+      # Expose the frontend service to the host (public IP) on port 80 
+      # which maps to the container's 5173 port (where Vite serves the app).
+      - "80:5173"
     depends_on:
       - backend
