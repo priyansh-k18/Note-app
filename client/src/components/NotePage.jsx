@@ -22,7 +22,7 @@ function NotesPage() {
 
   return (
     <div style={{ maxWidth: "600px", margin: "0 auto", padding: "20px" }}>
-      <h1>My Notes</h1>
+      <h1>My Notes app</h1>
       <NoteForm fetchNotes={fetchNotes} />
       <NoteList notes={notes} fetchNotes={fetchNotes} />
     </div>
